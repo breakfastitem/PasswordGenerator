@@ -54,6 +54,7 @@ var passwordParameters = {
 function writePassword() {
   passwordParameters.promptParameters();
   var password = generatePassword(passwordParameters);
+  console.log(password);
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
@@ -63,7 +64,64 @@ function writePassword() {
 //generates password based on passwordParameters object
 function generatePassword(passwordParameters) {
   var passwordArray= new Array(passwordParameters.length);
-  var index=0;
+  var index=passwordArray.length-1;
+
+  //Ensure password contains at least one of all necessary chars
+  if(passwordParameters.lowerCase){
+      if(passwordParameters.specialChar){
+        passwordArray[index]=getRandomSpecialChar();
+        index--;
+      }
+      if(passwordParameters.upperCase){
+        passwordArray[index]=getRandomChar().toUpperCase();
+        index--;
+      }
+      if(passwordParameters.numerics){
+        passwordArray[index]=getRandomNumber();
+        index--;
+      }
+      while(index > -1){
+        passwordArray[index]=getRandomChar();
+        index--;
+      }
+  }else if(passwordParameters.upperCase){
+    if(passwordParameters.specialChar){
+      passwordArray[index]=getRandomSpecialChar();
+      index--;
+    }
+    if(passwordParameters.numerics){
+      passwordArray[index]=getRandomNumber();
+      index--;
+    }
+    while(index > -1){
+      passwordArray[index]=getRandomChar().toUpperCase();
+      index--;
+    }
+  } else if(passwordParameters.numerics){
+    if(passwordParameters.specialChar){
+      passwordArray[index]=getRandomSpecialChar();
+      index--;
+    }
+    while(index > -1){
+      passwordArray[index]=getRandomNumber();
+      index--;
+    }
+
+  }else{
+    while(index > -1){
+      passwordArray[index]=getRandomSpecialChar();
+      index--;
+    }
+
+  }
+  var passwordString="";
+
+  //compile return string
+  for(index =0;index<passwordArray.length;index ++){
+    passwordString += passwordArray[index];
+  }
+
+  return passwordString;
 
 }
 
@@ -71,21 +129,21 @@ function generatePassword(passwordParameters) {
 function getRandomSpecialChar (){
   var special= ['!','/','@','#','$','^','&','*'];
 
-  var index = Math.floor(Math.random(special.length));
+  var index = Math.floor(Math.random()*special.length);
 
   return special[index];
 }
 function getRandomNumber (){
-  var numbers = [0,1,2,3,4,5,6,7,8,9];
+  var numbers = ['0','1','2','3','4','5','6','7','8','9'];
 
-  var index = Math.floor(Math.random(numbers.length));
+  var index = Math.floor(Math.random()*numbers.length);
 
   return numbers[index];
 }
 function getRandomChar (){
   var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 
-  var index = Math.floor(Math.random(alphabet.length));
+  var index = Math.floor(Math.random()*alphabet.length);
 
   return alphabet[index];
 }
