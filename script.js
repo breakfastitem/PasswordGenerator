@@ -14,11 +14,35 @@ var passwordParameters = {
   numerics : false,
   specialChar : false,
 
-  //TODO: Prompt ALL parameters
+  //functions
   promptParameters(){
-    var validInput=true;
+    var validInput=false;
+    var holder;
 
-    var holder = prompt("");
+    //Prompt user for length
+    while(!validInput){
+      holder = Number(prompt("Input password length \n MIN: "+this.MINLENGTH+ " MAX: " +this.MAXLENGTH));
+      if(holder>=8&&holder<=128){
+        validInput=true;
+      }else{
+        alert("Invalid Input");
+      }
+    }
+    this.length=holder;
+    validInput=false;
+
+    while(!validInput){
+      this.lowerCase = confirm("Allow lowercase characters in password?");
+      this.upperCase = confirm("Allow Uppercase characters in password?");
+      this.numerics = confirm("Allow numbers in password?");
+      this.specialChar = confirm("Allow special characters in password?");
+
+      if(this.lowerCase||this.upperCase||this.numerics||this.specialChar){
+        validInput=true;
+      }else{
+        alert("At least one character type must be permitted.");
+      }
+    }
 
   }
 
@@ -26,7 +50,8 @@ var passwordParameters = {
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
+  passwordParameters.promptParameters();
+  var password = generatePassword(passwordParameters);
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
