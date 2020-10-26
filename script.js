@@ -1,6 +1,8 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
+
+
 //Object that hold password criteria
 var passwordParameters = {
   //Constants
@@ -14,7 +16,7 @@ var passwordParameters = {
   numerics : false,
   specialChar : false,
 
-  //functions
+  //object functions
   promptParameters(){
     var validInput=false;
     var holder;
@@ -60,8 +62,34 @@ function writePassword() {
 //TODO: Genrate password based on parameters
 //generates password based on passwordParameters object
 function generatePassword(passwordParameters) {
+  var passwordArray= new Array(passwordParameters.length);
+  var index=0;
 
 }
+
+//Gets characters randomly from predifined arrays
+function getRandomSpecialChar (){
+  var special= ['!','/','@','#','$','^','&','*'];
+
+  var index = Math.floor(Math.random(special.length));
+
+  return special[index];
+}
+function getRandomNumber (){
+  var numbers = [0,1,2,3,4,5,6,7,8,9];
+
+  var index = Math.floor(Math.random(numbers.length));
+
+  return numbers[index];
+}
+function getRandomChar (){
+  var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+
+  var index = Math.floor(Math.random(alphabet.length));
+
+  return alphabet[index];
+}
+
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
