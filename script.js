@@ -53,8 +53,8 @@ var passwordParameters = {
 // Write password to the #password input
 function writePassword() {
   passwordParameters.promptParameters();
+  
   var password = generatePassword(passwordParameters);
-  console.log(password);
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
