@@ -17,7 +17,7 @@ var passwordParameters = {
   specialChar : false,
 
   //object functions
-  promptParameters(){
+  promptParameters : function(){
     var validInput=false;
     var holder;
 
@@ -60,7 +60,7 @@ function writePassword() {
   passwordText.value = password;
 
 }
-//TODO: Genrate password based on parameters
+
 //generates password based on passwordParameters object
 function generatePassword(passwordParameters) {
   var passwordArray= new Array(passwordParameters.length);
@@ -127,7 +127,7 @@ function generatePassword(passwordParameters) {
 
 //Gets characters randomly from predifined arrays
 function getRandomSpecialChar (){
-  var special= ['!','/','@','#','$','^','&','*'];
+  var special= ['!','/','@','#','$','%','^','&','*','?','+','-','[',']',',','.','<','>','(',')',':',';','=','{','}','_','|','~','`','\\','\"','\''];
 
   var index = Math.floor(Math.random()*special.length);
 
